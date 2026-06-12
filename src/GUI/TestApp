@@ -1,0 +1,60 @@
+package GUI;
+
+import Engine.Engine;
+import Engine.Node;
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
+import java.util.ArrayList;
+import java.util.Random;
+
+public class TestApp extends Application {
+
+    @Override
+    public void start(Stage primaryStage) {
+        // 1. Fetch your data framework matrix from an external controller/generator
+        ArrayList<ArrayList<Node>> operationalData = createDummyPipeline();
+
+        // 2. Instantiate the pure GUI layout manager component
+        GraphPipelineComponent visualizer = new GraphPipelineComponent();
+
+        // 3. Inject data to let the window execute layout operations
+        visualizer.render(operationalData);
+
+        // 4. Mount component onto standard application scene root
+        Scene scene = new Scene(visualizer, 900, 600);
+        primaryStage.setTitle("Graph Renderer Window");
+        primaryStage.setScene(scene);
+        primaryStage.show();
+    }
+
+    /**
+     * Helper method to build a dummy structure with varied heights
+     * and non-crossing connections to safely test the UI rendering limits.
+     */
+    private ArrayList<ArrayList<Node>> createDummyPipeline() {
+        int nextNodeID = 1;
+        Random randomGen = new Random(100);
+        ArrayList<ArrayList<Node>> pipeline = new ArrayList<>();
+        ArrayList<Node> first = new ArrayList<Node>();
+        for (int i = 0; i < 3; i++) {
+            first.add(Node.generateNode(randomGen, nextNodeID++));
+        }
+        pipeline.add(first);
+        ArrayList<Node> second = new ArrayList<Node>();
+        for (int i = 0; i < 5; i++) {
+            second.add(Node.generateNode(randomGen, nextNodeID++));
+        }
+        pipeline.add(second);
+        ArrayList<Node> third = new ArrayList<Node>();
+        for (int i = 0; i < 4; i++) {
+            third.add(Node.generateNode(randomGen, nextNodeID++));
+        }
+        pipeline.add(third);
+        Engine e = new Engine();
+        e.connectNodes(randomGen, pipeline.get(0), pipeline.get(1));
+        e.connectNodes(randomGen, pipeline.get(1), pipeline.get(2));
+
+        return pipeline;
+    }
+}
