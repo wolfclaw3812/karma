@@ -7,17 +7,17 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class EventReader {
-    File file;
+    File fileSource;
     ArrayList<File> fileSources = new ArrayList<File>(); // because what if I need ALL of them
     public EventReader(File file){
-        this.file = file;
+        this.fileSource = file;
     }
 
     public Event findEvent(int eventID){
         Event event = new Event(eventID);
 
         // Using try-with-resources automatically closes the file reader even if an error occurs
-        try (BufferedReader br = new BufferedReader(new FileReader(file))) {
+        try (BufferedReader br = new BufferedReader(new FileReader(fileSource))) {
             String line;
 
             while ((line = br.readLine()) != null) {
