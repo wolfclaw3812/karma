@@ -1,6 +1,7 @@
 package Combat;
 
 import java.util.ArrayList;
+import Engine.EngineCharacter;
 
 public class Combatant {
     String name;
@@ -11,4 +12,11 @@ public class Combatant {
 
     public Combatant(){}
 
+    public Combatant(EngineCharacter player){
+        this.name = player.getName();
+        this.health = player.getHealth();
+        this.shield = player.getShield();
+        this.activeSkills = player.getActiveSkills();
+        this.passiveSkills = player.getPassiveSkills();
+    }
 }
