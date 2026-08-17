@@ -13,5 +13,6 @@ module karmic {
     exports gui;
     exports engine;
     exports combat;
-    exports eventlistener;
+    exports eventListener;
+    exports event;
 }

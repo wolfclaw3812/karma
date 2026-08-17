@@ -1,14 +1,6 @@
 package event;
 
-import java.util.ArrayList;
-
-public class Event {
-    ArrayList<EventAction> actions = new ArrayList<EventAction>();
-    public Event(int eventID){
-
-    }
-
-    public void addEventAction(EventAction eventAction){
-        actions.add(eventAction);
-    }
+public abstract class Event {
+    public abstract String toString();
+    
 }
