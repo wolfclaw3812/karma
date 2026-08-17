@@ -1,30 +1,29 @@
 package combat;
 
-import eventlistener.*;
 import java.util.ArrayList;
 import java.util.List;
 
-import eventlistener.*;
-
-
+import eventListener.CombatListeners;
+import eventListener.DamageListener;
+import eventListener.CombatListeners.PreDamageListener;
 
 public class CombatManager {
-    private final List<CombatListeners> damageEventListeners = new ArrayList<>();
-
+    private final List<DamageListener> damageListeners = new ArrayList<>();
+    private final List<PreDamageListener> preDamageEventListeners = new ArrayList<>();
     public CombatManager(){
 
     }
 
-    public void addDamageEventListener(CombatListeners listener){
+    public void addDamageEventListener(DamageListener listener){
         if (listener == null) {
             throw new IllegalArgumentException("Listener cannot be null");
         }else{
-            damageEventListeners.add(listener);
+            damageListeners.add(listener);
         }
     }
 
-    public void removeDamageEventListener(CombatListeners listener){
-        damageEventListeners.remove(listener);
+    public void removeDamageEventListener(CombatListeners.DamageListener listener){
+        damageListeners.remove(listener);
     }
 
     public void dealDamage(Combatant source, Combatant target, Damage damage){
@@ -32,11 +31,11 @@ public class CombatManager {
         
         // Notify listeners
         // pre-damage events
-        for (PreDamageEventListener listener : preDamageEventListeners) {
+        for (PreDamageListener listener : preDamageEventListeners) {
             listener.onPreDamage(event);
         }
         target.takeDamage(damage);
-        for (CombatListeners listener : damageEventListeners) {
+        for (DamageListener listener : damageListeners) {
             listener.onDamage(event);
         }
         
