@@ -1,5 +1,5 @@
-import Engine.*;
-import GUI.*;
+import engine.*;
+import gui.*;
 
 import java.util.ArrayList;
 
@@ -13,4 +13,5 @@ public class Testing {
             }
         }
     }
+
 }

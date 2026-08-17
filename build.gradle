@@ -1,5 +1,7 @@
 plugins {
     id 'java'
+    id 'application'
+    id 'java-library'
 }
 
 group 'wolfclaw3812'
@@ -12,15 +14,19 @@ repositories {
 dependencies {
     testImplementation 'org.junit.jupiter:junit-jupiter:5.10.0'
     // Source: https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind
-    implementation("com.fasterxml.jackson.core:jackson-databind:2.16.1")
+    implementation 'com.fasterxml.jackson.core:jackson-databind:2.16.1'
+    
 
     implementation 'org.springframework:spring-expression:6.1.6'
+    implementation 'org.springframework:spring-core:6.1.6'
 }
 
 java {
     sourceCompatibility = JavaVersion.VERSION_17
     targetCompatibility = JavaVersion.VERSION_17
+    modularity.inferModulePath = true
 }
+
 
 test {
     useJUnitPlatform()
