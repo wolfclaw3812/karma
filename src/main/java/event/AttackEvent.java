@@ -3,12 +3,12 @@ package event;
 import combat.Combatant;
 import combat.Damage;
 
-public class DamageEvent extends Event {
+public class AttackEvent extends Event {
     private Combatant source;
     private Combatant target;
     private Damage damage;
 
-    public DamageEvent(Combatant source, Combatant target, Damage damage){
+    public AttackEvent(Combatant source, Combatant target, Damage damage){
         this.source = source;
         this.target = target;
         this.damage = damage;
@@ -40,7 +40,7 @@ public class DamageEvent extends Event {
 
     @Override
     public String toString(){
-        return String.format("%d damage from %s to %s", damage.calculateDamage(), source, target); //TODO
+        return String.format("Attack: %d damage from %s to %s", damage.calculateDamage(), source, target); //TODO
     }
     
 }
