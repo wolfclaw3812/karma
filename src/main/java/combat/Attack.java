@@ -12,6 +12,10 @@ public class Attack {
         }
     }
 
+    public boolean doesDamage(){
+        return damage.calculateDamage()>0;
+    }
+
     public Damage getDamage(){
         return this.damage;
     }
