@@ -43,4 +43,50 @@ public class Combatant {
     public void addCombatModifier(CombatModifier modifier) {
         combatModifiers.add(modifier);
     }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public double getHealth() {
+        return health;
+    }
+
+    public void setHealth(double health) {
+        this.health = health;
+    }
+
+    public double getShield() {
+        return shield;
+    }
+
+    public void setShield(double shield) {
+        this.shield = shield;
+    }
+
+    public ArrayList<ActiveSkill> getActiveSkills() {
+        return activeSkills;
+    }
+
+    public void setActiveSkills(ArrayList<ActiveSkill> activeSkills) {
+        this.activeSkills = activeSkills;
+    }
+
+    public ArrayList<PassiveSkill> getPassiveSkills() {
+        return passiveSkills;
+    }
+
+    public void setPassiveSkills(ArrayList<PassiveSkill> passiveSkills) {
+        this.passiveSkills = passiveSkills;
+    }
+
+    public void setCombatModifiers(ArrayList<CombatModifier> combatModifiers) {
+        this.combatModifiers = combatModifiers;
+    }
+
+    
 }
