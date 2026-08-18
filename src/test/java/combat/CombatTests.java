@@ -19,17 +19,18 @@ public class CombatTests {
     }
 
     @Test
+    @DisplayName("Determine basic functionality of attacks")
     void testAttackBasic(){
         Combatant attacker = new Combatant();
         Combatant defender = new Combatant();
         double baseDamage = 10.0;
         Attack attack = new Attack(attacker, defender, baseDamage);
-        Damage damage = new Damage(baseDamage);
         
         assertEquals(10.0, attack.getDamage().calculateDamage(), 0.001);
     }
 
     @Test
+    @DisplayName("Determine add and mult modifier functionality for defending and attacking")
     void testAttackAdvanced(){
         Combatant attacker = new Combatant();
         CombatModifier mod = new CombatModifier();
