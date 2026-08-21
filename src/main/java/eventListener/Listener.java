@@ -15,7 +15,8 @@ public abstract class Listener implements ListenerInterface{
             .withMethodResolvers(DataBindingMethodResolver.forInstanceMethodInvocation())
             .build();
     ExpressionParser parser = new SpelExpressionParser();
-    
+    int remainingActivations = 0;
+
     protected List<String> getEffects(){
         return this.effects;
     }
