@@ -10,10 +10,17 @@ public class Engine {
     private ArrayList<MapGenerator> maps = new ArrayList<MapGenerator>();
     private int currentMap = 0;
 
+    /**
+     * Creates an Engine object with a random seed. The seed is generated using Math.random().
+     */
     public Engine(){
         this("");
     }
 
+    /**
+     * Creates an Engine object with a provided seed. If the provided seed is invalid, instead a random seed is generated using Math.random().
+     * @param seed The seed used in Engine-related generation  . 
+     */
     public Engine(String seed){
         long longSeed;
         try {
@@ -29,6 +36,7 @@ public class Engine {
         MapGenerator mg = new MapGenerator(randomGen);
         mg.generateNodes();
         maps.add(mg);
+        currentMap = maps.size() - 1; // set current map to the newly generated map
     }
 
     public Map getCurrentMap(){
