@@ -3,42 +3,50 @@ package combat;
 import java.util.ArrayList;
 import java.util.List;
 
-import eventListener.CombatListeners;
-import eventListener.AttackListener;
-import eventListener.CombatListeners.PreDamageListener;
+import event.AttackEvent;
+import eventListener.PreAttackListener;
+import eventListener.PostAttackListener;
 
 public class CombatManager {
-    private final List<AttackListener> damageListeners = new ArrayList<>();
-    private final List<PreDamageListener> preDamageEventListeners = new ArrayList<>();
+    private final List<PostAttackListener> postAttackListeners = new ArrayList<>();
+    private final List<PreAttackListener> preAttackListeners = new ArrayList<>();
     public CombatManager(){
 
     }
 
-    public void addDamageEventListener(AttackListener listener){
+    public void addPostAttackListener(PostAttackListener listener){
         if (listener == null) {
             throw new IllegalArgumentException("Listener cannot be null");
         }else{
-            damageListeners.add(listener);
+            postAttackListeners.add(listener);
         }
     }
 
-    public void removeDamageEventListener(AttackListener.DamageListener listener){
-        damageListeners.remove(listener);
+    public void removePostAttackListener(PostAttackListener listener){
+        postAttackListeners.remove(listener);
     }
 
-    public void dealDamage(Combatant source, Combatant target, Damage damage){
-        AttackEvent event = new AttackEvent(source, target, damage);
+    public void makeAttack(Combatant source, Combatant target, Damage damage){
+        makeAttack(new AttackEvent(source, target, damage));
+    }
+
+    public void makeAttack(AttackEvent event){
+        Combatant source = event.getSource();
+        Combatant target = event.getTarget();
+        Damage damage = event.getDamage();
         
-        // Notify listeners
-        // pre-damage events
-        for (PreDamageListener listener : preDamageEventListeners) {
-            listener.onPreDamage(event);
+        // Notify pre-attack listeners
+        for (PreAttackListener listener : preAttackListeners) {
+            listener.onActivate(event);
         }
+
+        // Attack happens proper
         target.takeDamage(damage);
-        for (AttackListener listener : damageListeners) {
-            listener.onDamage(event);
+
+        // Notify post-attack listeners
+        for (PostAttackListener listener : postAttackListeners) {
+            listener.onActivate(event);
         }
-        
     }
 
 }
