@@ -8,13 +8,13 @@ import java.io.BufferedReader;
 import java.util.HashMap;
 
 public class EventLoader {
-    HashMap<Integer, Event> events;
+    HashMap<Integer, MapEvent> events;
     public EventLoader(){
-        this.events = new HashMap<Integer, Event>();
+        this.events = new HashMap<Integer, MapEvent>();
     }
     
     public void loadEvents(File file, int eventID){
-        this.events = new HashMap<Integer, Event>();
+        this.events = new HashMap<Integer, MapEvent>();
         try (BufferedReader br = new BufferedReader(new FileReader(file))) {
                 String line;
 
@@ -28,7 +28,7 @@ public class EventLoader {
                         try {
                             EventAction ea;
                             //split[0];//eventID, we know this from the parameter
-                            int eventActionID = Integer.parseInt(split[1]);//eventActionID
+                            Integer eventActionID = Integer.parseInt(split[1]);//eventActionID
                             int eventActionType = Integer.parseInt(split[2]);//eventActionType
                             String eventActionName = split[3];//eventActionName
                             String eventActionContent = split[4];//eventActionContent
@@ -55,7 +55,7 @@ public class EventLoader {
         }
     }
 
-    public HashMap<Integer, Event> getEvents() {
+    public HashMap<Integer, MapEvent> getEvents() {
         return events;
     } 
 }
