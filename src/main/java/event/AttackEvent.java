@@ -8,10 +8,27 @@ public class AttackEvent extends Event {
     private Combatant target;
     private Damage damage;
 
+    /**
+     * Creates an AttackEvent with the specified source, target, and damage.    
+     * @param source Combatant that is the source of the attack
+     * @param target Combatant that is the target of the attack
+     * @param damage Damage object representing damage dealt by attack
+     */
     public AttackEvent(Combatant source, Combatant target, Damage damage){
+        //super();
         this.source = source;
         this.target = target;
         this.damage = damage;
+    }
+
+    /**
+     * Empty constructor that creates an AttackEvent, a dummy Source and Target, and an empty Damage object. 
+     * To be used as fallback. 
+     */
+    public AttackEvent(){
+        this.source = new Combatant();
+        this.target = new Combatant();
+        this.damage = new Damage();
     }
     
     public Combatant getSource() {
